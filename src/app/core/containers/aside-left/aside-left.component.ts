@@ -1,14 +1,16 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
+
 
 @Component({
   selector: 'app-aside-left',
   templateUrl: './aside-left.component.html',
-  styleUrls: ['./aside-left.component.css']
+  styleUrls: ['./aside-left.component.css']  
 })
 export class AsideLeftComponent implements OnInit {
 
-  user: {name: string, photoUrl: string};
+  @Input() asideState: string;
 
+  user: {name: string, photoUrl: string};
   constructor() { }
 
   ngOnInit() {
