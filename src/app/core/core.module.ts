@@ -13,6 +13,7 @@ import { TopSearchFormComponent } from './components/top-search-form/top-search-
 import { DetailBookComponent } from './containers/detail-book/detail-book.component';
 
 import { routes } from "./routes.core";
+import { AlertsModule } from '../alerts/alerts.module';
 
 @NgModule({
   declarations: [CoreComponent, TopNavBarComponent, AsideLeftComponent, MainContentComponent, MainMenuComponent, HeaderAsideLeftComponent, TopSearchFormComponent, DetailBookComponent],
@@ -20,7 +21,8 @@ import { routes } from "./routes.core";
     CommonModule,
     FormsModule,
     BrowserAnimationsModule,
-    RouterModule.forChild(routes)    
+    RouterModule.forChild(routes) ,
+    AlertsModule  
   ],
   exports: [
     CoreComponent

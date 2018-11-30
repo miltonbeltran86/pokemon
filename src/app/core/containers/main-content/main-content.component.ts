@@ -1,5 +1,7 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { books } from "../../../books";
+import { MessagesService } from 'src/app/alerts/services/messages.service';
+import { IMessage } from 'src/app/alerts/message';
 
 @Component({
   selector: 'app-main-content',
@@ -22,12 +24,26 @@ export class MainContentComponent implements OnInit {
 
   books : any[] = [];
 
-  constructor() { }
+  constructor(private msgService:MessagesService) { 
 
-  ngOnInit() {
-    this.books = books.items;
   }
 
+  ngOnInit() {
+    window.addEventListener('online',this.updateConnection.bind(this));
+    window.addEventListener('offline',this.updateConnection.bind(this));
+  }
+
+  updateConnection(event){
+    let msg:IMessage;
+    if(event.type == 'online'){
+      msg = {msg: 'se ha establecido conexion de red', type:'success'};
+
+    }else if(event.type == 'offline'){
+      msg = {msg: 'se ha perdido conexion de red', type:'error'};
+
+    } 
+    this.msgService.message(msg);
+  }
   search(query : string) {
     let book = this.books.find(
       item => {
