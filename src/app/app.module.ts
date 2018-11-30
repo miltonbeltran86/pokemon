@@ -6,6 +6,10 @@ import { AuthModule } from "./auth/auth.module";
 
 import { routes } from "./routes";
 import { AppComponent } from './app.component';
+import { HttpClientInMemoryWebApiModule } from 'angular-in-memory-web-api';
+import { HttpModule } from '@angular/http';
+import { HttpClientModule } from '@angular/common/http';
+import { InMemoryDataService } from './data-api/books-data-api';
 
 @NgModule({
   declarations: [
@@ -15,7 +19,13 @@ import { AppComponent } from './app.component';
     BrowserModule,
     CoreModule,
     RouterModule.forRoot(routes),
-    AuthModule
+    AuthModule,
+    HttpClientInMemoryWebApiModule.forRoot(InMemoryDataService, { 
+      dataEncapsulation: false
+     }   
+      ),
+    HttpModule,
+    HttpClientModule
   ],
   providers: [],
   bootstrap: [AppComponent]

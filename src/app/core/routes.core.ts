@@ -11,6 +11,10 @@ export const routes:Routes = [
                 loadChildren: '../poke-main/poke-main.module#PokeMainModule'
             },
             {
+                path: 'collection',
+                loadChildren: '../collections/collections.module#CollectionsModule'
+            },
+            {
                 path: '', redirectTo: 'pokemons', pathMatch: 'full'
             }
         ]
