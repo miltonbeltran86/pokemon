@@ -1,4 +1,5 @@
 import { Component, OnInit, Output, EventEmitter } from '@angular/core';
+import { MessagesService } from 'src/app/alerts/services/messages.service';
 
 @Component({
   selector: 'app-top-search-form',
@@ -9,13 +10,19 @@ export class TopSearchFormComponent implements OnInit {
 
   @Output() search = new EventEmitter<string>();
 
-  constructor() { }
+  constructor(private msgService: MessagesService) { }
 
   ngOnInit() {
   }
 
   searchBooks(data: string) {
-    this.search.emit(data);
+    console.log("searchBooks")
+    
+    console.log(data)
+    console.log("searchBooks")
+   // this.search.emit(data);
+   this.msgService.namePokemon(data);
+    
   }
 
 }

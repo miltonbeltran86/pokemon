@@ -8,6 +8,8 @@ import { IMessage } from '../message';
 export class MessagesService {
   private subject = new Subject<IMessage>();
 
+  private dataSearch = new Subject<string>();
+
   constructor() { }
 
   message(msg: IMessage){
@@ -16,5 +18,13 @@ export class MessagesService {
 
   getMessage(): Observable<IMessage>{
     return this.subject.asObservable();
+  }
+
+  namePokemon(msg: string){
+    this.dataSearch.next(msg);
+  }
+
+  getNamePokemon(): Observable<string>{
+    return this.dataSearch.asObservable();
   }
 }

@@ -18,8 +18,9 @@ export class MainContentComponent implements OnInit {
   }
 
   set dataBook(data : string) {
+
+    console.log("databook1")
     this._dataBook = data;
-    this.search(data);
   }
 
   books : any[] = [];
@@ -31,6 +32,8 @@ export class MainContentComponent implements OnInit {
   ngOnInit() {
     window.addEventListener('online',this.updateConnection.bind(this));
     window.addEventListener('offline',this.updateConnection.bind(this));
+
+ 
   }
 
   updateConnection(event){
@@ -44,15 +47,9 @@ export class MainContentComponent implements OnInit {
     } 
     this.msgService.message(msg);
   }
-  search(query : string) {
-    let book = this.books.find(
-      item => {
-        return item.volumeInfo.title === query;
-      }
-    );
 
-    this.books = [];
-    this.books.push(book);
-  }
+ 
+
+
 
 }

@@ -23,12 +23,15 @@ export class CoreComponent implements OnInit {
   dataBook: string;
   state: string;
 
+  
+
   constructor() { }  
 
   ngOnInit() {
   }
 
   searchBook(data: string){
+    console.log("data")
     this.dataBook = data;
   }
 
