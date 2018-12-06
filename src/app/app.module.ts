@@ -10,6 +10,10 @@ import { HttpClientInMemoryWebApiModule } from 'angular-in-memory-web-api';
 import { HttpModule } from '@angular/http';
 import { HttpClientModule } from '@angular/common/http';
 import { InMemoryDataService } from './data-api/books-data-api';
+import { AngularFireModule } from '@angular/fire';
+import { AngularFireAuthModule } from '@angular/fire/auth';
+import { AngularFireDatabaseModule } from '@angular/fire/database';
+import { environment } from 'src/environments/environment';
 
 @NgModule({
   declarations: [
@@ -25,7 +29,10 @@ import { InMemoryDataService } from './data-api/books-data-api';
      }   
       ),
     HttpModule,
-    HttpClientModule
+    HttpClientModule,
+    AngularFireModule.initializeApp(environment.firebaseConfig,environment.firebaseConfig.projectId),
+    AngularFireAuthModule,
+    AngularFireDatabaseModule
   ],
   providers: [],
   bootstrap: [AppComponent]
