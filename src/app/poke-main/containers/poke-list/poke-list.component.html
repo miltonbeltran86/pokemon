@@ -4,14 +4,17 @@
     <div *ngFor="let book of books" class="col-12 col-sm-12 col-md-6 col-lg-4 col-xl-2">
         <div class="card">
             <div class="card-header">
-                {{book.volumeInfo.title}}
+                {{book.name}}
             </div>
-            <img class="card-img-top" src="{{book.volumeInfo.imageLinks.smallThumbnail}}" />
+            <img class="card-img-top" src="{{book.sprites.front_default}}" />
+           <!--
             <div class="card-body">
                 <p class="card-text">{{book.volumeInfo.publisher}}</p>
                 <p class="card-text">{{book.volumeInfo.publishedDate}}</p>
                 <a [routerLink]="['/detail', book.id]" class="btn btn-primary col-12 col-md-auto col-lg-auto">Ver Detalle</a>
+                <a (click)="addFavorites(book)" class="btn btn-primary col-12 col-md-auto col-lg-auto">Favoritos</a>
             </div>
+        -->
         </div>
     </div>
 </div>

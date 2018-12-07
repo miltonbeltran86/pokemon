@@ -16,11 +16,36 @@ export class PokeListComponent implements OnInit {
    this.getProducts();
   }
 
+  addFavorites(book){
+    this.pokemonsService.addFavorite(book);
+  }
+
   getProducts(): void {  
-      this.pokemonsService.getProducts().subscribe(products => this.books = products);  
+      this.pokemonsService.getProducts().subscribe(products => this.buildPokemons(products) );  
       this.msgService.getNamePokemon().subscribe((data:string) =>  this.searchBook(data))
     }
 
+    buildPokemons(pokes){
+      let temporalArray: Array<any> = [];
+      pokes.results.forEach(element => {
+
+        this.pokemonsService.getPokemon(element.url).subscribe(poke=>{temporalArray.push(poke);});
+        //let tmpPok = {"name":element.name,"image":this.getImage(element.url)};
+        
+        
+        
+      });
+      this.books = temporalArray;
+    }
+
+    getImage(url: string): string{
+      let pokemon;
+      
+       this.pokemonsService.getPokemon(url).subscribe(poke=>{pokemon = poke.sprites.front_default ; console.log(poke)});
+
+       console.log(pokemon);
+       return pokemon;
+    }
        searchBook(data:string){
         console.log("entro searchbook")
 
