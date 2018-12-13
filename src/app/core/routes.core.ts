@@ -2,7 +2,7 @@ import { Routes } from "@angular/router";
 import { CoreComponent } from "./containers/core/core.component";
 import { UthGuardService } from "../auth/services/uth-guard.service";
 export const routes:Routes = [
-    {
+    { 
         path: 'main',
         component: CoreComponent,
         canActivate:[UthGuardService],

@@ -14,6 +14,7 @@ export class PokemonsService {
   //private productsUrl = 'api/items';  // URL to web ap
   private productsUrl = 'https://pokeapi.co/api/v2/pokemon/'; 
   favsRef : AngularFireList<any>;
+  colRef : AngularFireList<any>;
   user: firebase.User;
   constructor(private http: HttpClient, private authFire: AngularFireAuth, private rdb: AngularFireDatabase, private alertService: MessagesService) {
     authFire.authState.subscribe(
@@ -21,6 +22,7 @@ export class PokemonsService {
         if(user){
           this.user = user;
           this.favsRef = rdb.list('favorites/'+this.user.uid);
+          this.colRef = rdb.list('collections/'+this.user.uid);
         }
       }
     );
@@ -33,6 +35,14 @@ export class PokemonsService {
     })
    }
 
+   addCollection(col : any){
+    let tempJson = {'name':'add'}
+    const promise = this.colRef.push(tempJson);
+    promise.then(_=> {
+        this.alertService.message({msg:"Libro agregado a favoritos", type:"sucess"})
+    })
+   }
+
   /** GET - productos desde el servidor */
   getProducts(): Observable<any> {
     return this.http.get<any>(this.productsUrl).pipe(tap(products => console.log(`Obtiene los productos`)), catchError(this.handleError('getProducts', [])));
@@ -40,6 +50,12 @@ export class PokemonsService {
 
 
   getPokemon(url: string): Observable<any> {
+    
+    return this.http.get<any>(url).pipe(tap(products => console.log(`Obtiene las colecciones`)), catchError(this.handleError('getProducts', [])));
+    //return this.http.get<any>(url).pipe(tap(_ => console.log(`obtiene producto id=${id}`)), catchError(this.handleError<any>(`getProduct id=${id}`)));
+  }
+
+  getCollections(url: string): Observable<any> {
     
     return this.http.get<any>(url).pipe(tap(products => console.log(`Obtiene el pokemon`)), catchError(this.handleError('getProducts', [])));
     //return this.http.get<any>(url).pipe(tap(_ => console.log(`obtiene producto id=${id}`)), catchError(this.handleError<any>(`getProduct id=${id}`)));
