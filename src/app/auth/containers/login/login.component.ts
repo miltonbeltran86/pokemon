@@ -19,10 +19,10 @@ export class LoginComponent implements OnInit {
     password: ['',Validators.required]
   });
  
-  login : ILogin;
+  //login : ILogin;
  
   constructor(private fb: FormBuilder,private authService : AuthService, private router: Router, private zone: NgZone) {
-    this.login = new Login();
+    //this.login = new Login();
    }
  
   ngOnInit() {
@@ -30,9 +30,9 @@ export class LoginComponent implements OnInit {
  
   submit() {
     //this.submitted.emit(this.loginForm.value);
-    console.log(this.login);
+    console.log(this.loginForm.value);
     
-        this.authService.loginWithEmail(this.login).then(
+        this.authService.loginWithEmail(this.loginForm.value).then(
           user => {
             localStorage.setItem('bizPokemon', JSON.stringify(user));
             this.router.navigate(['main']);

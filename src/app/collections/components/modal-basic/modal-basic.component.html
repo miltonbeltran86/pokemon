@@ -6,21 +6,34 @@
     </button>
   </div>
   <div class="modal-body">
-    <form>
+    <form [formGroup]="loginForm" (ngSubmit)="submit()">
       <div class="form-group">
-        <label for="dateOfBirth">Date of birth</label>
+        <!--<label for="dateOfBirth">Date of birth</label>
         <div class="input-group">
 
           <div class="input-group-append">
             <button class="btn btn-outline-secondary calendar" (click)="dp.toggle()" type="button"></button>
           </div>
-        </div>
+        </div>-->
+          <div class="form-group has-feedback">
+              <input type="text" class="form-control" placeholder="Name" formControlName="name" required  name="email">
+          </div>
+          <div class="form-group has-feedback">
+            <input type="text" class="form-control" placeholder="Description" formControlName="desc" required  name="password">
+          </div>
+          <div class="row">
+         
+            <div >
+              <button type="submit" [disabled]="!loginForm.valid"   class="btn btn-outline-dark">Add Collection</button>
+            </div>
+         
+          </div>
       </div>
     </form>
   </div>
-  <div class="modal-footer">
+  <!-- <div class="modal-footer">
     <button type="button" class="btn btn-outline-dark" (click)="modal.close('Save click')">Save</button>
-  </div>
+  </div>-->
 </ng-template>
 
 <button class="btn btn-lg btn-outline-primary" (click)="open(content)">Launch demo modal</button>

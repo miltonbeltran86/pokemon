@@ -5,6 +5,7 @@ import { RouterModule } from '@angular/router';
 import { routes } from './routes.collections';
 import { ModalBasicComponent } from './components/modal-basic/modal-basic.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { ReactiveFormsModule } from '@angular/forms';
 
 
 @NgModule({
@@ -12,7 +13,8 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
   imports: [
     CommonModule,
     NgbModule,
-    RouterModule.forChild(routes)
+    RouterModule.forChild(routes),
+    ReactiveFormsModule
    
   ]
   

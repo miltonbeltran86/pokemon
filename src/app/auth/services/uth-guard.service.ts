@@ -12,7 +12,7 @@ export class UthGuardService implements CanActivate{
 
   canActivate(): Observable<boolean>{
     let authState = this.authService.isLoggedIn();
-    if(!authState || !localStorage.getItem('bizPokemon')){
+    if(!authState && !localStorage.getItem('bizPokemon')){
       this.authService.logout();
       return of(false);
     }

@@ -21,4 +21,11 @@ export class CollectionsCoreComponent implements OnInit {
       this.collectionPoke = list;
     })
   }
+
+  displayCounter(data: any){
+    console.log("emitter");
+    console.log(data);
+    this.pokemonsService.addCollection(data);
+
+  }
 }
