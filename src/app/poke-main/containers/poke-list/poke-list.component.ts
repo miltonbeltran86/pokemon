@@ -33,6 +33,7 @@ export class PokeListComponent implements OnInit {
         const element = pokes.results[index];
         if(index > 100)
           break;
+          console.log(element.url);
         this.pokemonsService.getPokemon(element.url).subscribe(poke=>{temporalArray.push(poke);});
       }
 
