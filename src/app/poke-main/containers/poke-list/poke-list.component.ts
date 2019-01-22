@@ -2,6 +2,10 @@ import { Component, OnInit } from '@angular/core';
 import { books } from "../../../books";
 import { PokemonsService } from '../../services/pokemons.service';
 import { MessagesService } from 'src/app/alerts/services/messages.service';
+import { CollectionsService } from '../../../collections/services/collections.service';
+import { AngularFireAuth } from '@angular/fire/auth';
+import { map } from 'rxjs/operators';
+import { Observable } from 'rxjs';
 @Component({
   selector: 'app-poke-list',
   templateUrl: './poke-list.component.html',
@@ -9,11 +13,13 @@ import { MessagesService } from 'src/app/alerts/services/messages.service';
 })
 export class PokeListComponent implements OnInit {
 
-  constructor(private pokemonsService: PokemonsService, private msgService: MessagesService) { }
+  constructor(private collectionService: CollectionsService,private pokemonsService: PokemonsService, private msgService: MessagesService, private authFire: AngularFireAuth) { }
   books : any[] = [];
+  listCollections: Observable<any[]> ;
  ngOnInit() {
    // this.books = books.items;
    this.getProducts();
+   this.buildCollections();  
   }
 
   addFavorites(book){
@@ -21,8 +27,22 @@ export class PokeListComponent implements OnInit {
   }
 
   getProducts(): void {  
+    
       this.pokemonsService.getProducts().subscribe(products => this.buildPokemons(products) );  
       this.msgService.getNamePokemon().subscribe((data:string) =>  this.searchBook(data))
+    }
+
+    buildCollections(){
+      this.authFire.authState.subscribe(
+      user => {          
+        this.listCollections =  this.collectionService.listCollections().snapshotChanges().pipe(
+          map(changes => 
+            changes.map(c => ({ key: c.payload.key, ...c.payload.val() }))
+          ));
+          console.log("Revisar coleccion");
+          console.log(this.listCollections);
+      }
+    ); 
     }
 
     buildPokemons(pokes){
@@ -63,6 +83,13 @@ export class PokeListComponent implements OnInit {
         );
         this.books = [];
         this.books.push(book);
+      }
+
+      displayCounter(data: any){
+        console.log("emitter");
+        console.log(data);
+        //this.pokemonsService.addCollection(data);
+    
       }
 
 }
