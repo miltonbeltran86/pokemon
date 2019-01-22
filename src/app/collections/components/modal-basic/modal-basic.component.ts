@@ -30,6 +30,10 @@ export class ModalBasicComponent {
   }
 
   private getDismissReason(reason: any): string {
+    this.loginForm = this.fb.group({
+      name: ['', Validators.required],
+      desc: ['',Validators.required]
+    });
     if (reason === ModalDismissReasons.ESC) {
       return 'by pressing ESC';
     } else if (reason === ModalDismissReasons.BACKDROP_CLICK) {

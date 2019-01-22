@@ -37,7 +37,9 @@ export class PokemonsService {
 
    addCollection(col : any){
     let tempJson = {'name':'add'}
-    const promise = this.colRef.push(tempJson);
+    console.log(tempJson);
+    console.log(col);
+    const promise = this.colRef.push(col);
     promise.then(_=> {
         this.alertService.message({msg:"Libro agregado a favoritos", type:"sucess"})
     })

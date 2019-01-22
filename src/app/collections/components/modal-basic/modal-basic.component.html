@@ -1,6 +1,6 @@
 <ng-template #content let-modal>
   <div class="modal-header">
-    <h4 class="modal-title" id="modal-basic-title">Profile update</h4>
+    <h4 class="modal-title" id="modal-basic-title">Create Collection</h4>
     <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
       <span aria-hidden="true">&times;</span>
     </button>
@@ -21,13 +21,10 @@
           <div class="form-group has-feedback">
             <input type="text" class="form-control" placeholder="Description" formControlName="desc" required  name="password">
           </div>
-          <div class="row">
          
-            <div >
-              <button type="submit" [disabled]="!loginForm.valid"   class="btn btn-outline-dark">Add Collection</button>
-            </div>
-         
-          </div>
+              <button type="submit" [disabled]="!loginForm.valid"   class="btn btn-outline-dark">Add</button>
+          
+              
       </div>
     </form>
   </div>

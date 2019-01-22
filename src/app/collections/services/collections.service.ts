@@ -10,6 +10,7 @@ import { Observable, of } from 'rxjs';
 export class CollectionsService {
 
   colRef : AngularFireList<any>;
+  colwithPokemonsRef : AngularFireList<any>;
   user: firebase.User;
 
   constructor(private authFire: AngularFireAuth, private rdb: AngularFireDatabase) {
@@ -23,7 +24,33 @@ export class CollectionsService {
     );
    }
 
-   listCollections():Observable<any[]>{
-     return this.colRef.valueChanges();
+   listCollections():AngularFireList<any[]>{
+     return this.colRef;
    }
+
+   removeCollection(key: string){
+    this.rdb.list<any[]>('collections/' + this.user.uid + "/" + key).remove()
+  }
+
+  getPokemonsFromCollection(key:string): AngularFireList<any[]>{
+    this.colwithPokemonsRef = this.rdb.list<any[]>('collections/' + this.user.uid + "/" + key + "/pokemons");
+    return this.colwithPokemonsRef;
+  }
+
+
+  removePokemonFromCollection(key:string, pokemonId:string){
+    this.rdb.list<any[]>('collections/' + this.user.uid + "/" + key + "/pokemons/" + pokemonId).remove();
+  }
+
+  addPokemon(key:string, pokemon: any){
+    let favsRef1 = this.rdb.list('collections/' + this.user.uid + "/" + key + "/pokemons");
+    const promise = favsRef1.push(pokemon);
+    promise.then(
+      _ => {
+        alert("Pokemon Agregado");
+        //this.alertService.message({msg: "Pokemon Agregado", type: 'success'});
+      }
+    );
 }
+}
+
