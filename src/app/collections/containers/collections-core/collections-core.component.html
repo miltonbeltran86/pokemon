@@ -3,14 +3,19 @@
   <ngbd-modal-basic (submitted)='displayCounter($event)'></ngbd-modal-basic>
   <a (click)="addCollection($event)" class="btn btn-primary col-12 col-md-auto col-lg-auto">Add Collection</a>
 </p>
-<div class="row" id="books">
-  <div *ngFor="let book of collectionPoke" class="col-12 col-sm-12 col-md-6 col-lg-4 col-xl-2">
-      <div class="card">
-          <div class="card-header">
-              {{book.name}}
+
+    <div *ngFor="let book1 of collectionPoke | async" >
+        <div class="card w-100">
+            <div class="card-body">
+              <h5 class="card-title">{{book1.name}}</h5>
+              <p class="card-text">{{book1.desc}}</p>
+              <div class="col-xs-4">
+                <a class="col-12 col-md-auto col-lg-auto btn btn-primary float-right" [routerLink]="['../collectionBooks/', book1.key]">Open</a>
+                <div class="col-12 col-md-auto col-lg-auto btn btn-secondary float-right" (click)="removeCollection(book1.key)">Delete</div>
+            </div>
+            </div> npm install -g angular-cli
           </div>
-          
-      
-      </div>
-  </div>
-</div>
+        </div>
+
+
+  
