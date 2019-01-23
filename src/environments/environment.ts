@@ -3,6 +3,7 @@
 // The list of file replacements can be found in `angular.json`.
 
 export const environment = {
+  apiUrl: "https://pokeapi.co/api/v2/",
   production: false,
   firebaseConfig:{
     apiKey: "AIzaSyDABf3YL8U5Bk1nBfebUmzZkYNk9d3aMEQ",

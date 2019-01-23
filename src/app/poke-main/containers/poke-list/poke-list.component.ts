@@ -10,59 +10,64 @@ import { MessagesService } from 'src/app/alerts/services/messages.service';
 export class PokeListComponent implements OnInit {
 
   constructor(private pokemonsService: PokemonsService, private msgService: MessagesService) { }
-  books : any[] = [];
- ngOnInit() {
-   // this.books = books.items;
-   this.getProducts();
+  books: any[] = [];
+  ngOnInit() {
+    // this.books = books.items;
+    this.getProducts();
   }
 
-  addFavorites(book){
+  addFavorites(book) {
     this.pokemonsService.addFavorite(book);
   }
 
-  getProducts(): void {  
-      this.pokemonsService.getProducts().subscribe(products => this.buildPokemons(products) );  
-      this.msgService.getNamePokemon().subscribe((data:string) =>  this.searchBook(data))
+  getProducts(): void {
+    this.pokemonsService.getProducts().subscribe(products => this.buildPokemons(products));
+    this.msgService.getNamePokemon().subscribe((data: string) => this.searchBook(data))
+  }
+
+  buildPokemons(pokes) {
+    let temporalArray: Array<any> = [];
+
+
+    for (let index = 0; index < pokes.results.length; index++) {
+      const element = pokes.results[index];
+      if (index > 100)
+        break;
+      this.pokemonsService.getPokemon(element.url).subscribe(poke => { temporalArray.push(poke); });
     }
 
-    buildPokemons(pokes){
-      let temporalArray: Array<any> = [];
-      
+    this.books = temporalArray;
+  }
 
-      for (let index = 0; index < pokes.results.length; index++) {
-        const element = pokes.results[index];
-        if(index > 100)
-          break;
-        this.pokemonsService.getPokemon(element.url).subscribe(poke=>{temporalArray.push(poke);});
-      }
+  getImage(url: string): string {
+    let pokemon;
 
-      this.books = temporalArray;
+    this.pokemonsService.getPokemon(url).subscribe(poke => { pokemon = poke.sprites.front_default; console.log(poke) });
+
+    console.log(pokemon);
+    return pokemon;
+  }
+  searchBook(data: string) {
+    console.log("entro searchbook")
+    if (data) {
+      return this.pokemonsService.getProduct(data).subscribe(pokeInfo => { this.books =[pokeInfo] });
+    }else {
+      this.getProducts();
     }
+    //this.search(data);
+  }
 
-    getImage(url: string): string{
-      let pokemon;
-      
-       this.pokemonsService.getPokemon(url).subscribe(poke=>{pokemon = poke.sprites.front_default ; console.log(poke)});
 
-       console.log(pokemon);
-       return pokemon;
-    }
-       searchBook(data:string){
-        console.log("entro searchbook")
 
-        return this.pokemonsService.getProduct(data).subscribe(products => this.books = products);  
-        //this.search(data);
+  search(query: string) {
+    console.log("entro search(query: string) ")
+    let book = this.books.find(
+      item => {
+        return item.volumeInfo.Title === query;
       }
-
-      search(query: string){
-        console.log("entro")
-        let book = this.books.find(
-          item => {
-            return item.volumeInfo.Title === query;
-          }
-        );
-        this.books = [];
-        this.books.push(book);
-      }
+    );
+    this.books = [];
+    this.books.push(book);
+  }
 
 }
