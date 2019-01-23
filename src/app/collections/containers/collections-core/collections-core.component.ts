@@ -27,9 +27,6 @@ export class CollectionsCoreComponent implements OnInit {
   
 
   ngOnInit() {
-    //this.collectionsServices.listCollections().subscribe(list =>{
-    //  this.collectionPoke = list;
-    //})
 
     this.authFire.authState
     .subscribe(
@@ -37,16 +34,12 @@ export class CollectionsCoreComponent implements OnInit {
         this.collectionPoke =  this.collectionsServices.listCollections().snapshotChanges().pipe(
           map(changes => 
             changes.map(c => ({ key: c.payload.key, ...c.payload.val() }))
-          ));
-          console.log("Revisar coleccion");
-          console.log(this.collectionPoke);
+          ));          
       }
     );   
   }
 
   displayCounter(data: any){
-    console.log("emitter");
-    console.log(data);
     this.pokemonsService.addCollection(data);
 
   }

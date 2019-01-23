@@ -38,9 +38,7 @@ export class PokemonsService {
    }
 
    addCollection(col : any){
-    let tempJson = {'name':'add'}
-    console.log(tempJson);
-    console.log(col);
+    let tempJson = {'name':'add'}    
     const promise = this.colRef.push(col);
     promise.then(_=> {
         this.alertService.message({msg:"Libro agregado a favoritos", type:"sucess"})
@@ -48,8 +46,8 @@ export class PokemonsService {
    }
 
   /** GET - productos desde el servidor */
-  getProducts(): Observable<any> {
-    return this.http.get<any>(this.productsUrl).pipe(tap(products => console.log(`Obtiene los productos`)), catchError(this.handleError('getProducts', [])));
+  getProducts(offset:any, limit:any): Observable<any> {
+    return this.http.get<any>(this.productsUrl+"?offset="+offset+"&limit="+limit).pipe(tap(products => console.log(`Obtiene los productos`)), catchError(this.handleError('getProducts', [])));
   }
 
 

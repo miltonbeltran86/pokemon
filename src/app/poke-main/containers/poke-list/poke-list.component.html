@@ -1,6 +1,6 @@
 
 <div class="row" id="books">
-    <div *ngFor="let book of books" class="col-12 col-sm-12 col-md-6 col-lg-4 col-xl-2">
+    <div *ngFor="let book of books | orderBy: key : reverse" class="col-12 col-sm-12 col-md-6 col-lg-4 col-xl-2">
         <div class="card">
             <div class="card-header">
                 {{book.name}}
@@ -18,4 +18,15 @@
         
         </div>
     </div>
+    
 </div>
+
+<nav aria-label="Page navigation example">
+    <ul class="pagination">
+      <li class="page-item"><button class="page-link" [disabled]="isPageZero() ? true :null" (click)="Previous()" >Previous</button></li>
+      <div *ngFor="let book of books;let i= index">
+        <li class="page-item"><a class="page-link" (click)="GoPage(i)">{{i+1}}</a></li>        
+      </div>
+      <li class="page-item"><button class="page-link" (click)="Next()">Next</button></li>
+    </ul>
+  </nav>
