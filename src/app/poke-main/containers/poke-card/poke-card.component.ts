@@ -33,20 +33,13 @@ export class PokeCardComponent implements OnInit {
 
   ngOnInit() {
 
-    this.route.params.subscribe((params: Params)=> { this.id = params.id
-
+    this.route.params.subscribe((params: Params)=> { 
+      this.id = params.id
     console.log("Entro a detail")
-
     console.log(this.id)
-
-
-
-     this.pokeService.getPokemonByUrl( this.id).subscribe((data)=> {
-       
+     this.pokeService.getPokemonByUrl( this.id).subscribe((data)=> {       
       this.detailPokemon = data;
-      console.log(data)
-
-     
+      console.log(data)     
     }); 
     })   
 
