@@ -12,9 +12,7 @@ import { Input } from '@angular/core';
 export class ModalSelectCollectionComponent {
   closeResult: string;
 
-  constructor(private modalService: NgbModal, private fb: FormBuilder) {
-    console.log(this.dataInput);
-    console.log("envio data");
+  constructor(private modalService: NgbModal, private fb: FormBuilder) {   
     
   }
   
@@ -49,16 +47,15 @@ export class ModalSelectCollectionComponent {
   }
 
   submit() {
-    console.log("submit");
-    console.log(Object.values(this.loginForm.value));
+    
     this.modalService.dismissAll();
     this.submitted.emit(this.loginForm.value);
   }
 
   filterForeCasts(filterVal: any) {
-    if (filterVal == "0")
+    /*if (filterVal == "0")
         console.log(filterVal)
     else
-        console.log(filterVal)
+        console.log(filterVal)*/
 }
 }

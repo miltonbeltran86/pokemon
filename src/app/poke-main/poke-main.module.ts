@@ -8,7 +8,7 @@ import { ModalSelectCollectionComponent } from './components/modal-select-collec
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { ReactiveFormsModule } from '@angular/forms';
 import { PokeSimilarsComponent } from './containers/poke-similars/poke-similars.component';
-
+import { Ng2OrderModule } from 'ng2-order-pipe'; //importing the module
 
 @NgModule({
   declarations: [PokeListComponent, ModalSelectCollectionComponent ,PokeCardComponent, PokeSimilarsComponent],
@@ -16,7 +16,8 @@ import { PokeSimilarsComponent } from './containers/poke-similars/poke-similars.
     CommonModule,
     NgbModule,
     RouterModule.forChild(routes),
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    Ng2OrderModule 
   ]
 })
 export class PokeMainModule { }
