@@ -6,16 +6,18 @@ import { AngularFireAuth } from '@angular/fire/auth';
 import { AngularFireDatabase, AngularFireList } from '@angular/fire/database';
 import * as firebase from "firebase/app";
 import { MessagesService } from 'src/app/alerts/services/messages.service';
+import { environment } from "../../../environments/environment";
 @Injectable({
   providedIn: 'root'
 })
 export class PokemonsService {
 
   //private productsUrl = 'api/items';  // URL to web ap
-  private productsUrl = 'https://pokeapi.co/api/v2/pokemon/'; 
+  private productsUrl = 'https://pokeapi.co/api/v2/pokemon/';
   favsRef : AngularFireList<any>;
   colRef : AngularFireList<any>;
   user: firebase.User;
+  url: string = environment.apiUrl;
   constructor(private http: HttpClient, private authFire: AngularFireAuth, private rdb: AngularFireDatabase, private alertService: MessagesService) {
     authFire.authState.subscribe(
       user => {
@@ -52,24 +54,24 @@ export class PokemonsService {
 
 
   getPokemon(url: string): Observable<any> {
-    
+
     return this.http.get<any>(url).pipe(tap(products => console.log(`Obtiene las colecciones`)), catchError(this.handleError('getProducts', [])));
     //return this.http.get<any>(url).pipe(tap(_ => console.log(`obtiene producto id=${id}`)), catchError(this.handleError<any>(`getProduct id=${id}`)));
   }
 
   getCollections(url: string): Observable<any> {
-    
+
     return this.http.get<any>(url).pipe(tap(products => console.log(`Obtiene el pokemon`)), catchError(this.handleError('getProducts', [])));
     //return this.http.get<any>(url).pipe(tap(_ => console.log(`obtiene producto id=${id}`)), catchError(this.handleError<any>(`getProduct id=${id}`)));
   }
 
 
-  getProduct(url: string): Observable<any> {
-    let params = new HttpParams()
-    .set('volumeInfo.title', name);
-    const result = this.http.get<any[]>('api/items/',{ params});
-    //console.log(result.)
-    return result; 
+  getProduct(name: string): Observable<any> {
+    const url = `${this.url}pokemon/${name}/`;
+    return this.http.get<any>(url)
+    .pipe(
+      catchError(this.handleError(`Get Pokemon by Name (${name})`, null))
+    );
    }
 
    getPokemonByUrl(id :string): Observable<any> {
@@ -81,10 +83,10 @@ export class PokemonsService {
   /**   * Handle Http operation that failed.   * Let the app continue.   * @param operation - name of the operation that failed   * @param result - optional value to return as the observable result   */
   private handleError<T>(operation = 'operation', result?: T) {
     return (error: any): Observable<T> => {
-      // TODO: send the error to remote logging infrastructure     
-      console.error(error); // log to console instead      
+      // TODO: send the error to remote logging infrastructure
+      console.error(error); // log to console instead
 
-      // Let the app keep running by returning an empty result.   
+      // Let the app keep running by returning an empty result.
       return of(result as T);
     };
   }

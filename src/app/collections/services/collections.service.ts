@@ -37,6 +37,10 @@ export class CollectionsService {
     return this.colwithPokemonsRef;
   }
 
+  /*listFavorites():Observable<any[]>{
+    return this.favsRef.valueChanges();
+  }
+*/
 
   removePokemonFromCollection(key:string, pokemonId:string){
     this.rdb.list<any[]>('collections/' + this.user.uid + "/" + key + "/pokemons/" + pokemonId).remove();
