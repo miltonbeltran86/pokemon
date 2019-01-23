@@ -15,9 +15,10 @@ import { AngularFireAuthModule } from '@angular/fire/auth';
 import { AngularFireDatabaseModule } from '@angular/fire/database';
 import { environment } from 'src/environments/environment';
 
+
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent   
   ],
   imports: [
     BrowserModule,

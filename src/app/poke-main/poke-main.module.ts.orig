@@ -10,7 +10,11 @@ import { ReactiveFormsModule } from '@angular/forms';
 
 
 @NgModule({
-  declarations: [PokeListComponent, ModalSelectCollectionComponent ,PokeCardComponent],
+<<<<<<< HEAD
+  declarations: [PokeListComponent, ModalSelectCollectionComponent],
+=======
+  declarations: [PokeListComponent,PokeCardComponent],
+>>>>>>> 25d7bcbb601c831d261a74cdfe78ac9df51ccc6d
   imports: [
     CommonModule,
     NgbModule,
