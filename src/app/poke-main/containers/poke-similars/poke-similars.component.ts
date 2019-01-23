@@ -28,8 +28,8 @@ export class PokeSimilarsComponent implements OnInit {
             this.pokeService.getPokemon(pok.pokemon.url).subscribe(poke => {
               console.log("poke")
               console.log(poke)
-              this.pokemonSimilar.push(poke)
-              console.log(poke)
+              if (poke.id != this.id)
+                this.pokemonSimilar.push(poke)
             })
           });
         })
