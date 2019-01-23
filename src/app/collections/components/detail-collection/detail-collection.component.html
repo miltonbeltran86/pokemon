@@ -16,6 +16,7 @@
                   </div>-->
                   <div class="col-6">
                           <a [routerLink]="['../detail/',book?.id]" class="btn btn-primary col-12 col-md-auto col-lg-auto">Ver Detalle</a>
+                          <div class="col-12 col-md-auto col-lg-auto btn btn-secondary float-right" (click)="removeFromCollection(id, book.key)">Delete</div>
                   </div>
 
               </div>

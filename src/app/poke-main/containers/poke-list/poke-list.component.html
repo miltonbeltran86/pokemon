@@ -13,7 +13,7 @@
                 <p class="card-text">{{book.name}}</p>
                 <a [routerLink]="['../poke-card', book.id]" class="btn btn-primary col-12 col-md-auto col-lg-auto">Ver Detalle</a>
                 <a (click)="addFavorites(book)" class="btn btn-primary col-12 col-md-auto col-lg-auto">Favoritos</a>
-                <app-modal-select-collection [dataInput]="listCollections" (submitted)='displayCounter($event)'></app-modal-select-collection>
+                <app-modal-select-collection [dataInput]="listCollections" (submitted)='displayCounter($event,book)'></app-modal-select-collection>
                 
             </div>
         
