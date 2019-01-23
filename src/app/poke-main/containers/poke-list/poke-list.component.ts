@@ -28,6 +28,13 @@ export class PokeListComponent implements OnInit {
   buildPokemons(pokes) {
     let temporalArray: Array<any> = [];
 
+      for (let index = 0; index < pokes.results.length; index++) {
+        const element = pokes.results[index];
+        if(index > 100)
+          break;
+          console.log(element.url);
+        this.pokemonsService.getPokemon(element.url).subscribe(poke=>{temporalArray.push(poke);});
+      }
 
     for (let index = 0; index < pokes.results.length; index++) {
       const element = pokes.results[index];
