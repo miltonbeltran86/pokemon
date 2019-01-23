@@ -1,22 +1,16 @@
 <div class="card">
-  <div class="card-header">
-    
-  </div>
-  <img class="card-img-top" src="{{_poke?.sprites.front_default}}" />
+  
   <div class="card-body">
     <div class="row">
       <div class="col-12">
-          <h3 class="card-text">
-            Habilidades:
-          </h3>
-          <h3 class="card-text">
-            Nombre: {{detailPokemon.name}}            
-          </h3>
-          <div>
-            <img class="card-img-top" src="{{detailPokemon.sprites.back_shiny}}" />
-          </div>          
+        <img class="card-img-top" src="{{detailPokemon?.sprites.back_shiny}}" />
+        <!--<h3 class="card-text">Nombre:</h3>-->
+        <span>{{detailPokemon.name}}</span>
       </div>
       <div class="col-12">
+          <h4 class="card-text">
+              Habilidades:
+          </h4>
         <span *ngFor="let ab of detailPokemon?.abilities" class="badge badge-pill badge-success">{{ab?.ability.name}}</span>
       </div>
     </div>
@@ -25,9 +19,12 @@
         <button class="btn btn-primary" (click)="addFavorite(_poke)">
           <i class="fa fa-heart"></i></button>
       </div>
-      <div class="col-6">
-       <!-- <a  class="btn btn-primary col-12 col-md-auto col-lg-auto">Ver Detalle</a>-->
-      </div>
+
     </div>
   </div>
+</div>
+<div class="col-12">
+    <div class="card">
+        <app-poke-similars></app-poke-similars>
+    </div>  
 </div>

@@ -73,6 +73,15 @@ export class PokemonsService {
       catchError(this.handleError(`Get Pokemon by Name (${name})`, null))
     );
    }
+   //https://pokeapi.co/api/v2/ability/62/
+   getProductForAbilty(id: string): Observable<any> {
+    const url = `${this.url}pokemon/${id}/`;
+    return this.http.get<any>(url)
+    .pipe(
+      catchError(this.handleError(`Get Pokemon by Name (${name})`, null))
+    );
+  
+   }
 
    getPokemonByUrl(id :string): Observable<any> {
     return this.http.get<any>(this.productsUrl+id)

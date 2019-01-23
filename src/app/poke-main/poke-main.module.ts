@@ -7,10 +7,11 @@ import { routes } from "./routes.poke";
 import { ModalSelectCollectionComponent } from './components/modal-select-collection/modal-select-collection.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { ReactiveFormsModule } from '@angular/forms';
+import { PokeSimilarsComponent } from './containers/poke-similars/poke-similars.component';
 
 
 @NgModule({
-  declarations: [PokeListComponent, ModalSelectCollectionComponent ,PokeCardComponent],
+  declarations: [PokeListComponent, ModalSelectCollectionComponent ,PokeCardComponent, PokeSimilarsComponent],
   imports: [
     CommonModule,
     NgbModule,
