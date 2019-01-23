@@ -25,10 +25,13 @@ export class DetailCollectionComponent implements OnInit {
         changes.map(c => ({ key: c.payload.key, ...c.payload.val() }))
       ));
     })
+
     
   }
 
-  
+  removeFromCollection(keyCol, pokeid){
+    this.collectionService.removePokemonFromCollection(keyCol, pokeid);
+  }
 
 
   

@@ -43,18 +43,21 @@ export class CollectionsService {
 */
 
   removePokemonFromCollection(key:string, pokemonId:string){
+    console.log('collections/' + this.user.uid + "/" + key + "/pokemons/" + pokemonId)
     this.rdb.list<any[]>('collections/' + this.user.uid + "/" + key + "/pokemons/" + pokemonId).remove();
   }
 
   addPokemon(key:string, pokemon: any){
     let favsRef1 = this.rdb.list('collections/' + this.user.uid + "/" + key + "/pokemons");
     const promise = favsRef1.push(pokemon);
+    console.log("Pokemon Agregado")
     promise.then(
       _ => {
         alert("Pokemon Agregado");
         //this.alertService.message({msg: "Pokemon Agregado", type: 'success'});
       }
     );
+    
 }
 }
 

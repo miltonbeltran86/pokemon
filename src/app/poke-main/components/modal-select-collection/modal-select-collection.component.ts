@@ -18,12 +18,12 @@ export class ModalSelectCollectionComponent {
     
   }
   
-  @Output() submitted = new EventEmitter();
+  @Output() submitted = new EventEmitter<any>();
   @Input() dataInput : any[] = [];
 
   
   loginForm = this.fb.group({
-    name: ['', Validators.required]
+    name: [[], Validators.required]
   });
   
 
@@ -37,7 +37,7 @@ export class ModalSelectCollectionComponent {
 
   private getDismissReason(reason: any): string {
     this.loginForm = this.fb.group({
-      name: ['', Validators.required]
+      name: [[], Validators.required]
     });
     if (reason === ModalDismissReasons.ESC) {
       return 'by pressing ESC';
@@ -50,6 +50,7 @@ export class ModalSelectCollectionComponent {
 
   submit() {
     console.log("submit");
+    console.log(Object.values(this.loginForm.value));
     this.modalService.dismissAll();
     this.submitted.emit(this.loginForm.value);
   }

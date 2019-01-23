@@ -24,6 +24,8 @@ export class CollectionsCoreComponent implements OnInit {
     this.collectionsServices.removeCollection(col);
   }
 
+  
+
   ngOnInit() {
     //this.collectionsServices.listCollections().subscribe(list =>{
     //  this.collectionPoke = list;

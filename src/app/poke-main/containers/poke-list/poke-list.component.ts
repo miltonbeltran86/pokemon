@@ -23,6 +23,8 @@ export class PokeListComponent implements OnInit {
   }
 
   addFavorites(book) {
+    console.log("emitter from popup fav");
+        console.log(book);
     this.pokemonsService.addFavorite(book);
   }
 
@@ -98,9 +100,11 @@ export class PokeListComponent implements OnInit {
     this.books.push(book);
   }
 
-      displayCounter(data: any){
-        console.log("emitter");
-        console.log(data);
+      displayCounter(data: any, poke: any){
+        console.log("emitter from popup");
+        console.log(poke);
+        console.log(data.name);
+        this.collectionService.addPokemon(data.name, poke);
         //this.pokemonsService.addCollection(data);
 
       }
