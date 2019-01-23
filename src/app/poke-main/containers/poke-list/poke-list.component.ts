@@ -16,10 +16,15 @@ export class PokeListComponent implements OnInit {
   constructor(private collectionService: CollectionsService,private pokemonsService: PokemonsService, private msgService: MessagesService, private authFire: AngularFireAuth) { }
   books : any[] = [];
   listCollections: Observable<any[]> ;
+  page: any;
+  limit:any;
  ngOnInit() {
    // this.books = books.items;
    this.getProducts();
    this.buildCollections();
+   
+    this.page = 0;
+    this.limit = 20;
   }
 
   addFavorites(book) {
@@ -30,7 +35,7 @@ export class PokeListComponent implements OnInit {
 
   getProducts(): void {
 
-      this.pokemonsService.getProducts().subscribe(products => this.buildPokemons(products) );
+      this.pokemonsService.getProducts(this.page*this.limit, this.limit).subscribe(products => this.buildPokemons(products) );
       this.msgService.getNamePokemon().subscribe((data:string) =>  this.searchBook(data))
     }
 
@@ -53,18 +58,13 @@ export class PokeListComponent implements OnInit {
 
       for (let index = 0; index < pokes.results.length; index++) {
         const element = pokes.results[index];
-        if(index > 100)
-          break;
-          console.log(element.url);
+        //if(index > 100)
+        //  break;
+          
         this.pokemonsService.getPokemon(element.url).subscribe(poke=>{temporalArray.push(poke);});
       }
-
-    for (let index = 0; index < pokes.results.length; index++) {
-      const element = pokes.results[index];
-      if (index > 100)
-        break;
-      this.pokemonsService.getPokemon(element.url).subscribe(poke => { temporalArray.push(poke); });
-    }
+      console.log(pokes.results);
+   
 
     this.books = temporalArray;
   }
@@ -107,6 +107,27 @@ export class PokeListComponent implements OnInit {
         this.collectionService.addPokemon(data.name, poke);
         //this.pokemonsService.addCollection(data);
 
+      }
+
+      Next(){
+        this.page = this.page + 1;
+        this.getProducts();
+      }
+
+      Previous(){
+        this.page = this.page - 1;
+        if(this.page <= 0)
+          this.page = 0;
+        this.getProducts();
+      }
+
+      GoPage(numPage:any){
+        this.page = numPage;
+        this.getProducts();
+      }
+
+      isPageZero():boolean{
+        return this.page <=0;
       }
 
 }

@@ -19,4 +19,15 @@
         
         </div>
     </div>
+    
 </div>
+
+<nav aria-label="Page navigation example">
+    <ul class="pagination">
+      <li class="page-item"><button class="page-link" [disabled]="isPageZero() ? true :null" (click)="Previous()" >Previous</button></li>
+      <div *ngFor="let book of books;let i= index">
+        <li class="page-item"><a class="page-link" (click)="GoPage(i)">{{i+1}}</a></li>        
+      </div>
+      <li class="page-item"><button class="page-link" (click)="Next()">Next</button></li>
+    </ul>
+  </nav>

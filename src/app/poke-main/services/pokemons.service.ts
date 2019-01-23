@@ -48,8 +48,8 @@ export class PokemonsService {
    }
 
   /** GET - productos desde el servidor */
-  getProducts(): Observable<any> {
-    return this.http.get<any>(this.productsUrl).pipe(tap(products => console.log(`Obtiene los productos`)), catchError(this.handleError('getProducts', [])));
+  getProducts(offset:any, limit:any): Observable<any> {
+    return this.http.get<any>(this.productsUrl+"?offset="+offset+"&limit="+limit).pipe(tap(products => console.log(`Obtiene los productos`)), catchError(this.handleError('getProducts', [])));
   }
 
 
