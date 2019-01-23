@@ -10,10 +10,10 @@
               <h5 class="card-title">{{book1.name}}</h5>
               <p class="card-text">{{book1.desc}}</p>
               <div class="col-xs-4">
-                <a class="col-12 col-md-auto col-lg-auto btn btn-primary float-right" [routerLink]="['../collectionBooks/', book1.key]">Open</a>
+                <a class="col-12 col-md-auto col-lg-auto btn btn-primary float-right" [routerLink]="['../detailCollection/', book1.key]">Open</a>
                 <div class="col-12 col-md-auto col-lg-auto btn btn-secondary float-right" (click)="removeCollection(book1.key)">Delete</div>
             </div>
-            </div> npm install -g angular-cli
+            </div>
           </div>
         </div>
 
