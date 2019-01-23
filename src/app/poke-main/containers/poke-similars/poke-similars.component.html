@@ -1,13 +1,16 @@
 <div class="row" id="books">
-  <p>It works</p>
-  <div *ngFor="let hability of pokemonAbility | slice:0:3; let i=index" class="col-12 col-sm-12 col-md-6 col-lg-4 col-xl-2">
+  <div class="col-12 main-section">
+    <header>
+      <h3>Pokemones Similares</h3>
+    </header>
+  </div>
+  <div *ngFor="let pokemon of pokemonSimilar | slice:0:6; let i=index" class="col-12 col-sm-12 col-md-6 col-lg-4 col-xl-2">
     <div class="card">
       <div class="card-header">
-          {{hability.pokemon.name}}
+        {{pokemon.name}}
       </div>
-      <!--<img class="card-img-top" src="{{pokesimilar.sprites.front_default}}" />-->
+      <img class="card-img-top" src="{{pokemon?.sprites.back_shiny}}" />
       <div class="card-body">
-        <!--<p class="card-text">{{pokesimilar.abilities.ability.name}}</p>-->
       </div>
     </div>
   </div>
