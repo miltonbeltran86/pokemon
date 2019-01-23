@@ -4,12 +4,9 @@
         <h1>Poke App 2</h1>
     </div>
     <div class="col-6 row align-items-center">
-
         <app-top-search-form (search)="search($event)" class="col-6"></app-top-search-form>
-
         <div class="col-6 user-icon">
-            <a class="link-profile"><img src="http://s3.amazonaws.com/37assets/svn/765-default-avatar.png"></a>
+            <a class="link-profile"><img [src]="user?.photoUrl"></a>
         </div>
-
     </div>
 </header>
